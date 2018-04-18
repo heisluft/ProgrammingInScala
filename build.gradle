@@ -1,0 +1,16 @@
+group 'de.heisluft'
+version '0.0.1'
+
+apply plugin: 'scala'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.scala-lang:scala-library-all:2.12.5"
+    testCompile "org.junit.jupiter:junit-jupiter-api:5.1.0"
+}
