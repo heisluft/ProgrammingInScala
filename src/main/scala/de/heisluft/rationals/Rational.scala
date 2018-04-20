@@ -19,14 +19,23 @@ abstract class Rational(private var numerator: Int, private var denominator: Int
 
   private def gcd = Math.gcd(numerator, denominator)
 
-  final def num: Int = numerator / gcd
-  final def denom: Int = denominator / gcd
+  numerator = numerator / gcd
+  denominator = denominator / gcd
 
-  protected def setNum(to: Int): Unit = numerator = to
+  final def num: Int = numerator
+  final def denom: Int = denominator
 
-  protected def setDenom(to: Int): Unit = denominator = to
+  protected def setNum(to: Int): Unit = {
+    val gcd = Math.gcd(to, denominator)
+    numerator = to / gcd
+    denominator = denominator / gcd
+  }
 
-  def this(numerator: Int) = this(numerator, 1)
+  protected def setDenom(to: Int): Unit = {
+    val gcd = Math.gcd(numerator, to)
+    numerator = numerator / gcd
+    denominator = to / gcd
+  }
 
   override final def compareTo(other: Rational): Int = if(this == other) 0 else if(this < other) -1 else 1
 
@@ -74,7 +83,7 @@ abstract class Rational(private var numerator: Int, private var denominator: Int
 }
 
 object Rational {
-  implicit def int2Rat(toConvert: Int): Rational = new ImmutableRational(toConvert, 1)
+  implicit def int2Rat(toConvert: Int): Rational = new ImmutableRational(toConvert)
 
   final val ZERO: Rational = 0
 }

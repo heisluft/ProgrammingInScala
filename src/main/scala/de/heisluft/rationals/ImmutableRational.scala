@@ -2,6 +2,8 @@ package de.heisluft.rationals
 
 class ImmutableRational(numerator: Int, denominator: Int) extends Rational(numerator, denominator) {
 
+  def this(numerator: Int) = this(numerator, 1)
+
   override def /(other: Rational): Rational = new ImmutableRational(num * other.denom, denom * other.num)
 
   override def /(other: Int): Rational = {
